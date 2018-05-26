@@ -11,8 +11,14 @@ using System.Windows.Forms;
 
 namespace PhoneBookNextLevel
 {
+    public struct Phone
+    {
+        public string Name;
+        public string Number;
+    }
     public partial class Form1 : Form
     {
+        List<Phone> newPhone = new List<Phone>();
         public Form1()
         {
             InitializeComponent();
@@ -61,20 +67,54 @@ namespace PhoneBookNextLevel
             panel1.Enabled = true;
             PhoneNumberText.Focus(); 
         }
+        public static bool gg = false;
 
         private void Savebtn_Click(object sender, EventArgs e)
         {
-            try
+            int count = 0;
+            for (int i = 0; i < PhoneNumberText.Text.Length; ++i)
             {
-                phoneBookBindingSource.EndEdit();
-                App.PhoneBook.AcceptChanges();
-                App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
-                panel1.Enabled = false;
+                if (char.IsLetter(PhoneNumberText.Text[i]))
+                {
+                    count++;
+                }
             }
-            catch (Exception ex)
+            if ((PhoneNumberText.Text == "") || (NameText.Text == "") || (SurnameText.Text == ""))
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                App.PhoneBook.RejectChanges();
+                MessageBox.Show("Ошибка исходных данных.\n" + "Необходимо ввести данные в оба поля");
+            }
+            else if (count == 0)
+            {
+                if (gg == true)
+                {
+                    string textik = File.ReadAllText("{0}//data.dat");
+                    if (textik.Contains(NameText.Text) || textik.Contains(PhoneNumberText.Text) || (textik.Contains(SurnameText.Text)))
+                    {
+                        MessageBox.Show("Контакт уже существует!");
+                    }
+                    else
+                    {
+                        int x1 = search(NameText.Text);
+
+                        if (x1 == -1)
+                        {
+                            try
+                            {
+                                phoneBookBindingSource.EndEdit();
+                                App.PhoneBook.AcceptChanges();
+                                App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
+
+                                panel1.Enabled = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                App.PhoneBook.RejectChanges();
+                            }
+                        }
+                        
+                    }
+                }
             }
         }
         static AppData db;
@@ -101,6 +141,17 @@ namespace PhoneBookNextLevel
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+        int search(string s)
+        {
+            for (int i = 0; i < newPhone.Count; i++)
+            {
+                if (newPhone[i].Name.Equals(s))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)

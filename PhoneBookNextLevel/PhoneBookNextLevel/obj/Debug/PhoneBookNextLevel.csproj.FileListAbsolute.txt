@@ -10,3 +10,12 @@ c:\users\ipy\documents\visual studio 2015\Projects\PhoneBookNextLevel\PhoneBookN
 C:\Users\IPY\Documents\GitHub\PHONE\PhoneBookNextLevel\PhoneBookNextLevel\bin\Debug\PhoneBookNextLevel.exe.config
 C:\Users\IPY\Documents\GitHub\PHONE\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.exe
 C:\Users\IPY\Documents\GitHub\PHONE\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.pdb
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\bin\Debug\PhoneBookNextLevel.exe.config
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.exe
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.pdb
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\bin\Debug\PhoneBookNextLevel.exe
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\bin\Debug\PhoneBookNextLevel.pdb
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.csprojResolveAssemblyReference.cache
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.Form1.resources
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.Properties.Resources.resources
+C:\Users\IPY\Downloads\PHONE-master\PhoneBookNextLevel\PhoneBookNextLevel\obj\Debug\PhoneBookNextLevel.csproj.GenerateResource.Cache
