@@ -11,14 +11,10 @@ using System.Windows.Forms;
 
 namespace PhoneBookNextLevel
 {
-    public struct Phone
-    {
-        public string Name;
-        public string Number;
-    }
+
     public partial class Form1 : Form
     {
-        List<Phone> newPhone = new List<Phone>();
+        
         public Form1()
         {
             InitializeComponent();
@@ -71,33 +67,14 @@ namespace PhoneBookNextLevel
 
         private void Savebtn_Click(object sender, EventArgs e)
         {
-            int count = 0;
-            for (int i = 0; i < PhoneNumberText.Text.Length; ++i)
-            {
-                if (char.IsLetter(PhoneNumberText.Text[i]))
-                {
-                    count++;
-                }
-            }
+            
             if ((PhoneNumberText.Text == "") || (NameText.Text == "") || (SurnameText.Text == ""))
             {
                 MessageBox.Show("Ошибка исходных данных.\n" + "Необходимо ввести данные в оба поля");
             }
-            else if (count == 0)
+            else 
             {
-                if (gg == true)
-                {
-                    string textik = File.ReadAllText("{0}//data.dat");
-                    if (textik.Contains(NameText.Text) || textik.Contains(PhoneNumberText.Text) || (textik.Contains(SurnameText.Text)))
-                    {
-                        MessageBox.Show("Контакт уже существует!");
-                    }
-                    else
-                    {
-                        int x1 = search(NameText.Text);
-
-                        if (x1 == -1)
-                        {
+                            
                             try
                             {
                                 phoneBookBindingSource.EndEdit();
@@ -113,9 +90,7 @@ namespace PhoneBookNextLevel
                             }
                         }
                         
-                    }
-                }
-            }
+         
         }
         static AppData db;
         protected static AppData App
@@ -142,17 +117,7 @@ namespace PhoneBookNextLevel
         {
 
         }
-        int search(string s)
-        {
-            for (int i = 0; i < newPhone.Count; i++)
-            {
-                if (newPhone[i].Name.Equals(s))
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
+ 
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -171,7 +136,7 @@ namespace PhoneBookNextLevel
 
                 {
                     var query = from o in App.PhoneBook
-                                where o.НомерТелефона == SearchTxt.Text || o.Имя.Contains(SearchTxt.Text) || o.Фамилия.Contains(SearchTxt.Text) || o.Категория == SearchTxt.Text
+                                where (o.НомерТелефона == SearchTxt.Text || o.Имя.Contains(SearchTxt.Text) || o.Фамилия.Contains(SearchTxt.Text) || o.Категория == SearchTxt.Text)
                                 select o;
                     dataGridView1.DataSource = query.ToList();
                 }
