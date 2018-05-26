@@ -14,7 +14,7 @@ namespace PhoneBookNextLevel
 
     public partial class Form1 : Form
     {
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -55,42 +55,58 @@ namespace PhoneBookNextLevel
 
         private void PhoneNumberText_TextChanged(object sender, EventArgs e)
         {
-     
+
         }
 
         private void ChangeButt_Click(object sender, EventArgs e)
         {
             panel1.Enabled = true;
-            PhoneNumberText.Focus(); 
+            PhoneNumberText.Focus();
         }
         public static bool gg = false;
 
+        private bool Search()
+        {
+            var query = from o in App.PhoneBook
+                        where (o.НомерТелефона.Contains(PhoneNumberText.Text) || o.Имя.Contains(NameText.Text) || o.Фамилия.Contains(SurnameText.Text) || o.Категория == SearchTxt.Text)
+                        select o;
+            if (query.Count() == 1)
+                return false;
+            else
+                return true;
+
+        }
+
         private void Savebtn_Click(object sender, EventArgs e)
         {
-            
-            if ((PhoneNumberText.Text == "") || (NameText.Text == "") || (SurnameText.Text == ""))
+            if (Search() & ((PhoneNumberText.Text != "") & (NameText.Text != "") & (SurnameText.Text != "") & CategoryName.Text != ""))
+                MessageBox.Show("Данный контакт уже существует!");
+            else
             {
-                MessageBox.Show("Ошибка исходных данных.\n" + "Необходимо ввести данные в оба поля");
-            }
-            else 
-            {
-                            
-                            try
-                            {
-                                phoneBookBindingSource.EndEdit();
-                                App.PhoneBook.AcceptChanges();
-                                App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
+                if ((PhoneNumberText.Text == "") || (NameText.Text == "") || (SurnameText.Text == "") || CategoryName.Text == "")
+                {
+                    MessageBox.Show("Ошибка исходных данных.\n" + "Необходимо ввести все данные");
+                }
+                else
+                {
+                    try
+                    {
+                        phoneBookBindingSource.EndEdit();
+                        App.PhoneBook.AcceptChanges();
+                        App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
 
-                                panel1.Enabled = false;
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                App.PhoneBook.RejectChanges();
-                            }
-                        }
-                        
-         
+                        panel1.Enabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        App.PhoneBook.RejectChanges();
+                    }
+                }
+            }
+
+
+
         }
         static AppData db;
         protected static AppData App
@@ -117,7 +133,7 @@ namespace PhoneBookNextLevel
         {
 
         }
- 
+
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
